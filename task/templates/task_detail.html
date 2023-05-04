@@ -12,10 +12,15 @@
 
    </form>
    
-   <form action="{% url 'complete_task' task.id  %}" method="POST">
+   <form action="{% url 'complete_task' tasks.id  %}" method="POST">
         {% csrf_token %}
         <button>Completed</button>
    </form>
+
+   <form action="{% url 'delete_task' tasks.id  %}" method="POST">
+    {% csrf_token %}
+    <button>Delete</button>
+</form>
 
   
 

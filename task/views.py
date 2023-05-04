@@ -6,6 +6,8 @@ from django.contrib.auth import login, logout, authenticate
 from .forms import TaskForm
 from .models import Task
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
 
 def signup(request):
     if request.method == 'GET':
@@ -36,7 +38,7 @@ def index(request):
     return render(request, 'index.html')
 
 
-    
+@login_required #Se agrega para proteger las rutas ya que se podria acceder sin estar logeado
 def task(request):
     tasks=Task.objects.filter(user=request.user, datecompleted__isnull=True)
     return render(request, 'task.html',{
@@ -44,7 +46,7 @@ def task(request):
     })
 
 
-
+@login_required
 def task_detail(request, task_id):
     task= get_object_or_404(Task, pk=task_id, user=request.user)
     
@@ -68,11 +70,16 @@ def task_detail(request, task_id):
                 'error':'Error updating task'
             })
 
-
+@login_required
+def task_completed(request):
+    tasks=Task.objects.filter(user=request.user, datecompleted__isnull=False).order_by('-datecompleted')
+    return render(request, 'task.html',{
+        'tasks':tasks
+    })
 
 
     
-
+@login_required
 def signout(request):
     logout(request)
     return redirect('index')
@@ -95,7 +102,7 @@ def signin(request):
             return redirect('task')
 
    
-
+@login_required
 def create_task(request):
 
     if request.method =='GET':
@@ -116,6 +123,7 @@ def create_task(request):
             })
 
 
+@login_required
 def complete_task(request, task_id):
     task=get_object_or_404(Task, pk=task_id, user=request.user)
 
@@ -124,6 +132,12 @@ def complete_task(request, task_id):
         task.save()
         return redirect('task')
 
+@login_required
+def delete_task(request, task_id):
+    task=get_object_or_404(Task,pk=task_id, user=request.user)
+    if request.method =='POST':
+        task.delete()
+        return redirect('task')
 
 
 

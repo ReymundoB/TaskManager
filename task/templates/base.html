@@ -11,10 +11,11 @@
         <ul>
             <li><a href="/">Home</a></li>
             
-            
+            {#Cambiar los url por el nombre #}
             {% if user.is_authenticated %}
             <li><a href="/signout">Logout</a></li>
             <li><a href="/task">Task</a></li>
+            <li><a href="/task_completed">Task comleted</a></li>
             <li><a href="/task/create">Create task</a></li>
             {% else %}
             <li><a href="/signup">Signup</a></li>
