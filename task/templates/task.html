@@ -2,19 +2,38 @@
 
 
 {% block content %}
-    <h1>Task</h1>
-    <ul>
-        {% for tarea in tasks %}
-        <li>
-            <a href="{% url 'task_detail' tarea.id  %}">
-            
-                <h1>{{tarea.title}}</h1>
-                <p>{{tarea.description}}</p>
-                <p>{{tarea.datecompleted|date:'M j Y:i'}}</p>
-            
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center display-3 py-5">Task pending</h1>
+            <ul class="list-group">
+                {% for tarea in tasks %}
+                <a class="list-group-item" href="{% url 'task_detail' tarea.id  %}">
+                   
+                    <header class="d-flex justify-content-between">
+
+                        {% if task.important %}
+                        <h1 class="fw-bold text-success">{{tarea.title}}</h1>
+                        
+                        {% else %}
+                        <h1 class="fw-bold ">{{tarea.title}}</h1>
+                        {% endif %} 
+                        <p>{{tarea.datecompleted|date:'M j Y:i'}}</p>                     
+                       
+                    </header>
+                     
+                    <p>{{tarea.description}}</p>
+
+                       
+                    
+                   
+                </a>
+                {% endfor %}
+            </ul>
+        </div>
+        
+    </div>
+</main>
+   
     
 {% endblock %}

@@ -5,24 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Django CRUD aplication</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'index' %}">Django App</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+            
+                {#Cambiar los url por el nombre #}
+                {% if user.is_authenticated %}
+              
+               
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/task/create">Create task</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/task">Task pending</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/task_completed">Task completed</a></li>
+                
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/signout">Logout</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/signup">Signup</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/signin">Signin</a></li>
+                
+    
+                {% endif%}
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+
+
+
+
+
     <nav>
         <ul>
-            <li><a href="/">Home</a></li>
             
-            {#Cambiar los url por el nombre #}
-            {% if user.is_authenticated %}
-            <li><a href="/signout">Logout</a></li>
-            <li><a href="/task">Task</a></li>
-            <li><a href="/task_completed">Task comleted</a></li>
-            <li><a href="/task/create">Create task</a></li>
-            {% else %}
-            <li><a href="/signup">Signup</a></li>
-            <li><a href="/signin">Signin</a></li>
-            
-
-            {% endif%}
             
 
         </ul>
