@@ -20,7 +20,15 @@ from task import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('signup/', views.singup),
-    path('', views.index),
+    path('', views.index, name="index"),
+    path('signup/', views.signup, name="signup"),
+    path('signout/', views.signout, name="signout"),
+    path('task/', views.task, name="task"),
+    path('signin/', views.signin, name="signin"),
+    path('task/create', views.create_task, name="create_task"),
+    path('task/<int:task_id>', views.task_detail, name="task_detail"),
+    path('task/<int:task_id/complete>', views.complete_task, name="complete_task"),
+
+
 
 ]
